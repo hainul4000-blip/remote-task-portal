@@ -53,9 +53,23 @@ def main() -> None:
         button = (f'<a class="button button-primary provider-action" href="{html.escape(link, quote=True)}" target="_blank" rel="sponsored noopener noreferrer">Continue to provider <span aria-hidden="true">↗</span></a>'
                   if configured else f'<span class="button provider-action" aria-disabled="true">{ "GetLink not configured" if active else ("Offer unavailable" if status == "inactive" else "Offer not published")}</span>')
         requirements = "".join(f"<li>{html.escape(str(item))}</li>" for item in offer.get("requirements", []))
+        reward = offer.get("reward", {})
+        if isinstance(reward, dict):
+            reward_label = str(reward.get("label", "")).strip()
+            amount = reward.get("amount")
+            if not reward_label and amount is not None:
+                symbols = {"USD": "$", "IDR": "Rp", "MYR": "RM", "PHP": "₱"}
+                currency = str(reward.get("currency", ""))
+                reward_label = f"{symbols.get(currency, currency + ' ')}{amount}" + (f" / {reward.get('unit')}" if reward.get("unit") else "")
+            reward_label = reward_label or "Reward details pending"
+            reward_type = str(reward.get("type", "other")).title()
+            reward_note = "Provider terms linked" if reward.get("verified") and reward.get("termsUrl") else "Demo · confirm with provider"
+        else:
+            reward_label, reward_type, reward_note = str(reward or "Reward details pending"), "Other", "Confirm with provider"
+        reward_html = f'<div class="detail-reward"><span>{html.escape(reward_type)} reward</span><strong>{html.escape(reward_label)}</strong><small>{html.escape(reward_note)}</small></div>'
         status_note = "" if active else f'<div class="notice">{ "This offer is currently inactive." if status == "inactive" else "This offer is a draft and is not available to visitors."}</div>'
         body = f'''<section class="page-hero page-hero-compact"><div class="container"><p class="eyebrow">Offer details · {countries}</p><h1>{title}</h1><p class="page-lede">{desc}</p></div></section>
-<section class="section section-reading"><div class="container content-grid"><article class="prose offer-detail"><h2>Before you continue</h2><p>{desc}</p><ul>{requirements}</ul><p><strong>Reward information:</strong> {html.escape(str(offer.get("reward", "See provider terms")))}. Eligibility, availability, and any reward are determined by the provider.</p><div class="disclosure">This is a third-party offer. RemoteTaskPortal does not operate the activity or verify completion. Review the provider’s terms and privacy information before participating. Rewards are not guaranteed.</div>{status_note}{button}</article><aside class="side-card"><span class="side-icon">↗</span><h2>Third-party provider</h2><p>The provider controls sign-up, eligibility, activity, terms, any reward, and support. Contact it directly with participation questions.</p><a class="text-link" href="/how-it-works/">How offers work →</a></aside></div></section>'''
+<section class="section section-reading"><div class="container content-grid"><article class="prose offer-detail"><h2>Before you continue</h2><p>{desc}</p><ul>{requirements}</ul>{reward_html}<p>Eligibility, availability, and any reward are determined by the provider.</p><div class="disclosure">This is a third-party offer. RemoteTaskPortal does not operate the activity or verify completion. Review the provider’s terms and privacy information before participating. Rewards are not guaranteed.</div>{status_note}{button}</article><aside class="side-card"><span class="side-icon">↗</span><h2>Third-party provider</h2><p>The provider controls sign-up, eligibility, activity, terms, any reward, and support. Contact it directly with participation questions.</p><a class="text-link" href="/how-it-works/">How offers work →</a></aside></div></section>'''
         (OUT / "tasks" / slug).mkdir(parents=True, exist_ok=True)
         (OUT / "tasks" / slug / "index.html").write_text(shell(f"{title} | RemoteTaskPortal", desc, path, body, noindex=status == "draft"), encoding="utf-8")
     today = date.today().isoformat()
