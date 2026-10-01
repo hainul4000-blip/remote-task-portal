@@ -1,7 +1,14 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "updated": "2026-10-01",
-  "notice": "Demonstration listings. Replace example GetLink values with your AdBlueMedia GetLinks before enabling outbound offer buttons. Provider terms apply; no earnings or completion outcomes are guaranteed.",
+  "notice": "Listings marked Demo are examples. Add provider-confirmed reward details and a valid provider GetLink before publishing as paid work.",
+  "rewardTypes": [
+    "cash",
+    "voucher",
+    "discount",
+    "points",
+    "other"
+  ],
   "offers": [
     {
       "id": "offer-survey-id",
@@ -18,7 +25,15 @@
         "Country availability: Indonesia",
         "Eligibility and survey availability are decided by the provider"
       ],
-      "reward": "See provider terms",
+      "reward": {
+        "type": "cash",
+        "label": "Reward details pending",
+        "amount": null,
+        "currency": "USD",
+        "unit": "task",
+        "verified": false,
+        "termsUrl": ""
+      },
       "getlink": "https://example.com/replace-with-adbluemedia-getlink-id"
     },
     {
@@ -36,7 +51,15 @@
         "Country availability: Malaysia",
         "Device requirements and offer conditions are set by the provider"
       ],
-      "reward": "See provider terms",
+      "reward": {
+        "type": "voucher",
+        "label": "Reward details pending",
+        "amount": null,
+        "currency": "MYR",
+        "unit": "offer",
+        "verified": false,
+        "termsUrl": ""
+      },
       "getlink": "https://example.com/replace-with-adbluemedia-getlink-my"
     },
     {
@@ -54,7 +77,15 @@
         "Country availability: Philippines",
         "Screening, availability, and any reward are determined by the provider"
       ],
-      "reward": "See provider terms",
+      "reward": {
+        "type": "discount",
+        "label": "Reward details pending",
+        "amount": null,
+        "currency": "PHP",
+        "unit": "offer",
+        "verified": false,
+        "termsUrl": ""
+      },
       "getlink": "https://example.com/replace-with-adbluemedia-getlink-ph"
     }
   ]
