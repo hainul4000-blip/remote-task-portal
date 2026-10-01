@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-10-01",
+  "notice": "Demonstration listings. Replace example GetLink values with your AdBlueMedia GetLinks before enabling outbound offer buttons. Provider terms apply; no earnings or completion outcomes are guaranteed.",
+  "offers": [
+    {
+      "id": "offer-survey-id",
+      "slug": "indonesia-research-surveys",
+      "title": "Indonesia Research Surveys",
+      "category": "Research surveys",
+      "type": "Online survey",
+      "countries": [
+        "ID"
+      ],
+      "status": "active",
+      "description": "A demonstration listing for research surveys available to eligible participants in Indonesia. Review the provider’s requirements and privacy terms before continuing.",
+      "requirements": [
+        "Country availability: Indonesia",
+        "Eligibility and survey availability are decided by the provider"
+      ],
+      "reward": "See provider terms",
+      "getlink": "https://example.com/replace-with-adbluemedia-getlink-id"
+    },
+    {
+      "id": "offer-app-my",
+      "slug": "malaysia-app-experiences",
+      "title": "Malaysia App Experiences",
+      "category": "App experiences",
+      "type": "Mobile app offer",
+      "countries": [
+        "MY"
+      ],
+      "status": "active",
+      "description": "A demonstration listing for mobile app experiences in Malaysia. Check device compatibility, eligibility, and any conditions directly with the provider.",
+      "requirements": [
+        "Country availability: Malaysia",
+        "Device requirements and offer conditions are set by the provider"
+      ],
+      "reward": "See provider terms",
+      "getlink": "https://example.com/replace-with-adbluemedia-getlink-my"
+    },
+    {
+      "id": "offer-study-ph",
+      "slug": "philippines-online-studies",
+      "title": "Philippines Online Studies",
+      "category": "Research studies",
+      "type": "Online research",
+      "countries": [
+        "PH"
+      ],
+      "status": "active",
+      "description": "A demonstration listing for online research opportunities in the Philippines. Participation is subject to provider screening and availability.",
+      "requirements": [
+        "Country availability: Philippines",
+        "Screening, availability, and any reward are determined by the provider"
+      ],
+      "reward": "See provider terms",
+      "getlink": "https://example.com/replace-with-adbluemedia-getlink-ph"
+    }
+  ]
+}
